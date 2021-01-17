@@ -1,33 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import UserForm from '../components/UserForm/UserForm';
 import Cards from '../components/Cards/Cards';
-import axios from 'axios';
-import FullscreenLoader from '../components/FullscreenLoader/FullscreenLoader';
+
 
 function App() {
-  const [loading, setLoading] = useState(true);
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    setLoading(true);
-    axios.get('https://burger-builder-6a382-default-rtdb.europe-west1.firebasedatabase.app/users.json')
-      .then(response => {
-        let responseToArray = Object.keys(response.data).map(key => response.data[key]);
-        setUsers(responseToArray.reverse());
-        setLoading(false);
-      })
-  },[])
 
   return (
-    <>
+    <Router>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+            <Link to="/new-avatar">New Avatar</Link>
+            </li>
+          </ul>
+        </nav>
       <div className="my-10 p-10 mx-auto max-w-6xl items-center">
-        <UserForm />
-        {loading
-          ? <FullscreenLoader/>
-          : <Cards users={users} />
-          }
+        <Switch>
+          <Route path="/new-avatar" component={UserForm}/>
+          <Route path="/" component={Cards}/>
+        </Switch>
       </div>
-    </>
+    </Router>
   );
 }
 

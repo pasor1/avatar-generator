@@ -1,14 +1,16 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import Card from '../Cards/Card/Card';
-
+import FullscreenLoader from '../FullscreenLoader/FullscreenLoader';
 
 const UserForm = (props) => {
+  const [saving, setSaving] = useState(false);
   const [username, setUsername] = useState('');
   const [avatarType, setAvatarType] = useState('set1');
 
   const usernameChangeHandler = e => {
-    setUsername(e.target.value)
+    setUsername(e.target.value);
+    console.log(props);
   }
 
   const avatarTypeChangeHandler = e => {
@@ -17,16 +19,23 @@ const UserForm = (props) => {
 
   const saveAvatarHandler = () => {
     if (username) {
+      setSaving(true);
       const data = {
         username: username,
         avatarType: avatarType
       };
       axios.post('https://burger-builder-6a382-default-rtdb.europe-west1.firebasedatabase.app/users.json', data)
-      .then(response => console.log(response))      
+        .then(response => { 
+          console.log(response);
+          props.history.push('/');
+        })
     }
   }
 
   return (
+      saving
+        ? <FullscreenLoader />
+    : (
     <div className="mb-10 flex flex-wrap justify-center">
         <div>
           <div className="mx-2 md:mb-10">
@@ -64,7 +73,8 @@ const UserForm = (props) => {
             <Card username={username} avatarType={avatarType} />
           </div>
         </div>
-    </div>
+    </div >
+    )
   )
 }
 export default UserForm;

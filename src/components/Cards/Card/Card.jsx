@@ -13,13 +13,18 @@ const Card = props => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`https://robohash.org/${props.username}?set=${props.avatarType}&size=${AVATAR_SIZE.width}x${AVATAR_SIZE.height}`, { responseType: 'arraybuffer' })
-      .then(response => {
+    axios.get(
+        `https://robohash.org/${props.username}?set=${props.avatarType}&size=${AVATAR_SIZE.width}x${AVATAR_SIZE.height}`,
+        { responseType: 'arraybuffer' }
+      ).then(response => {
         const resImg = Buffer.from(response.data, 'binary').toString('base64');
         setImgBase64(`data:image/png;base64, ${resImg}`)
         setLoading(false);
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        setLoading(false);
+        console.log(error);
+      })
   }, [props.username,props.avatarType])
 
   return (

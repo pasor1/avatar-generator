@@ -37,12 +37,12 @@ const UserForm = (props) => {
     <div className="mb-10 flex flex-wrap justify-center">
         <div>
           <div className="mx-2 md:mb-10">
-            <label htmlFor="username" className="text-gray-500">Username</label><br/>
+            <label htmlFor="username" className="text-gray-500">Name</label><br/>
             <input
               name="username"
               value={username}
               onChange={usernameChangeHandler}
-              className="w-72 sm:w-auto p-3 text-2xl border border-purple-300 bg-white rounded-lg shadow outline-none focus:outline-none focus:border-purple-500" placeholder="Username..." />
+              className="w-72 sm:w-auto p-3 text-2xl border border-purple-300 bg-white rounded-lg shadow outline-none focus:outline-none focus:border-purple-500" placeholder="Name..." />
           </div>
           <div className="mx-2 my-3 md:my-10">
             <label htmlFor="avatarType" className="text-gray-500">Avatar type</label><br />

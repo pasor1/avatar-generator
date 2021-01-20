@@ -8,28 +8,9 @@ const Cards = props => {
   const [users, setUsers] = useState([]);
   
   useEffect(() => {
-    setLoading(true);
-    axios.get('https://burger-builder-6a382-default-rtdb.europe-west1.firebasedatabase.app/users.json')
-      .then(response => {
-        let responseToArray = []
-        for (const item in response.data) {
-          responseToArray.push({
-            avatarType: response.data[item].avatarType,
-            username: response.data[item].username,
-            id: item
-          })
-        }
-        setUsers(responseToArray.reverse());
-        setLoading(false);
-        if (responseToArray.length === 0) {
-          props.history.push('/new-avatar');
-        }
-      })
-      .catch(error => {
-        setLoading(false);
-        console.log(error);
-      })
-  }, [props.history])
+    getUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const getUsers = () => {
     setLoading(true);

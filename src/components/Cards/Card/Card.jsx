@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import avatarPlaceholder from '../../../assets/images/avatarPlaceholder.png'
+import avatarPlaceholder from '../../../assets/images/avatarPlaceholder.png';
 
 const AVATAR_SIZE = {
   width: 200,
@@ -28,7 +28,7 @@ const Card = props => {
   }, [props.username,props.avatarType])
 
   return (
-    <div className="flex flex-wrap flex-col justify-center items-center bg-white border p-5 w-full min-w-full rounded-lg shadow-lg transition duration-100 transform hover:shadow-2xl hover:scale-110 text-center overflow-hidden">
+    <div className="flex flex-wrap flex-col justify-center items-center bg-white border py-4 w-full min-w-full rounded-lg shadow-lg transition duration-100 transform hover:shadow-2xl hover:scale-110 text-center overflow-hidden">
       <div style={{ width: `${AVATAR_SIZE.width}px`, height: `${AVATAR_SIZE.height}px` }} className="flex justify-center items-center mx-auto">
           {
           loading
@@ -43,6 +43,14 @@ const Card = props => {
           ? <h3 className="mt-3">{props.username}</h3>
           : <h3 className="mt-3 text-gray-300">username</h3>
       }
+      {props.interactive
+        ? (<>
+          <button className="" onClick={() => props.onclickProp(props.id)}>edit</button> 
+          <button className="" onClick={() => props.onclickProp(props.id)}>delete</button>
+          </>
+        )
+      : null}
+
     </div>
   )
 }

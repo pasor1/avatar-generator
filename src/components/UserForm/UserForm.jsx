@@ -10,7 +10,6 @@ const UserForm = (props) => {
 
   const usernameChangeHandler = e => {
     setUsername(e.target.value);
-    console.log(props);
   }
 
   const avatarTypeChangeHandler = e => {
@@ -26,7 +25,6 @@ const UserForm = (props) => {
       };
       axios.post('https://burger-builder-6a382-default-rtdb.europe-west1.firebasedatabase.app/users.json', data)
         .then(response => { 
-          console.log(response);
           props.history.push('/');
         })
     }
@@ -63,11 +61,11 @@ const UserForm = (props) => {
           <div className="mx-2 my-7 md:my-10 text-center">
             {username
               ? <button onClick={saveAvatarHandler} className="bg-purple-900 text-white outline-none p-3 rounded-lg focus:outline-none hover:bg-purple-800 shadow-lg transform duration-75 ease-in-out active:shadow-sm active:translate-y-0.5 focus:ring;">Save you Avatar</button>
-              : <button disabled className="bg-purple-900 text-white outline-none p-3 rounded-lg focus:outline-none shadow-lg opacity-30 cursor-not-allowed">Save you Avatar</button>
+              : <button disabled className="bg-purple-900 text-white outline-none p-3 rounded-lg focus:outline-none shadow-lg opacity-30 cursor-not-allowed">Save your Avatar</button>
             }
           </div>
         </div>
-        <div>
+        <div className="w-80">
           <div className="mx-1 sm:mx-7">
             <span className="text-gray-500">Preview</span><br/>
             <Card username={username} avatarType={avatarType} />

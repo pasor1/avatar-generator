@@ -5,10 +5,10 @@
 @layer base {
   html {
     min-width: 344px;
-    @apply text-gray-800 bg-gray-100 text-base;
+    @apply text-gray-800 bg-gray-200 text-base;
   }
   body {
-    @apply bg-gray-100;  
+    @apply bg-gray-200;  
   }
   h1 {
     @apply text-5xl font-bold;

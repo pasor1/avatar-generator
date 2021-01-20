@@ -42,7 +42,7 @@ const Card = props => {
       {
         props.username
           ? <h3 className="my-3">{props.username}</h3>
-          : <h3 className="my-3 text-gray-300">username</h3>
+          : <h3 className="my-3 text-gray-300">Name</h3>
       }
       {props.interactive
         ? (<>

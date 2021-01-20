@@ -6,13 +6,13 @@ import FullscreenLoader from '../FullscreenLoader/FullscreenLoader';
 const Cards = props => {
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
-
+  
   useEffect(() => {
-    setLoading(true);
     getUsers();
   }, [])
 
   const getUsers = () => {
+    setLoading(true);
     axios.get('https://burger-builder-6a382-default-rtdb.europe-west1.firebasedatabase.app/users.json')
       .then(response => {
         let responseToArray = []
@@ -25,6 +25,9 @@ const Cards = props => {
         }
         setUsers(responseToArray.reverse());
         setLoading(false);
+        if (responseToArray.length === 0) {
+          props.history.push('/new-avatar');
+        } 
       })
       .catch(error => {
         setLoading(false);
@@ -32,8 +35,8 @@ const Cards = props => {
       })
   }
 
-
   const clickDeleteHandler = (id) => {
+    setLoading(true);
     axios.delete(`https://burger-builder-6a382-default-rtdb.europe-west1.firebasedatabase.app/users/${id}.json`)
       .then(response => {
         getUsers();
@@ -48,7 +51,7 @@ const Cards = props => {
     loading
       ? <FullscreenLoader />
       : (
-      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-10 justify-items-stretch">
+      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-10 justify-items-stretch pt-5">
         { 
           users.map(user => (
             <Card interactive key={user.id} id={user.id} username={user.username} avatarType={user.avatarType} onclickProp={clickDeleteHandler} />

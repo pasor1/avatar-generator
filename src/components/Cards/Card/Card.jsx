@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import avatarPlaceholder from '../../../assets/images/avatarPlaceholder.png';
+import { FaTrashAlt } from 'react-icons/fa';
 
 const AVATAR_SIZE = {
   width: 200,
@@ -28,25 +29,25 @@ const Card = props => {
   }, [props.username,props.avatarType])
 
   return (
-    <div className="flex flex-wrap flex-col justify-center items-center bg-white border py-4 w-full min-w-full rounded-lg shadow-lg transition duration-100 transform hover:shadow-2xl hover:scale-110 text-center overflow-hidden">
+    <div className="flex flex-wrap flex-col justify-center items-center bg-white border pt-2 w-full min-w-full rounded-lg shadow-lg text-center overflow-hidden transition duration-100 transform hover:scale-110">
       <div style={{ width: `${AVATAR_SIZE.width}px`, height: `${AVATAR_SIZE.height}px` }} className="flex justify-center items-center mx-auto">
           {
           loading
           ? (<div className="loader"></div>)
           : props.username
-          ? <img style={{ width: `${AVATAR_SIZE.width}px`, height: `${AVATAR_SIZE.height}px` }} alt={props.username} src={imgBase64} />
+              ? <img style={{ width: `${AVATAR_SIZE.width}px`, height: `${AVATAR_SIZE.height}px` }} alt={props.username} src={imgBase64} className="" />
           : <img style={{ width: `${AVATAR_SIZE.width}px`, height: `${AVATAR_SIZE.height}px` }} alt={props.username} src={avatarPlaceholder} />
         }
       </div>
       {
         props.username
-          ? <h3 className="mt-3">{props.username}</h3>
-          : <h3 className="mt-3 text-gray-300">username</h3>
+          ? <h3 className="my-3">{props.username}</h3>
+          : <h3 className="my-3 text-gray-300">username</h3>
       }
       {props.interactive
         ? (<>
-          <button className="" onClick={() => props.onclickProp(props.id)}>edit</button> 
-          <button className="" onClick={() => props.onclickProp(props.id)}>delete</button>
+          {/* <button className="" onClick={() => props.onclickProp(props.id)}>edit</button>  */}
+          <button className="flex items-center mt-3 mb-1 text-sm py-0 px-3 rounded bg-gray-400 bg-opacity-70 text-white shadow" onClick={() => props.onclickProp(props.id)}><FaTrashAlt className="mr-1"/>Remove</button>
           </>
         )
       : null}

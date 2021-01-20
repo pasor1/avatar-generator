@@ -2,31 +2,28 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  NavLink
 } from "react-router-dom";
 import UserForm from '../components/UserForm/UserForm';
 import Cards from '../components/Cards/Cards';
 import titleLogo from '../assets/images/title.png';
 
-function App() {
 
+function App() {
   return (
     <Router>
-      <header className="text-center mb-7 bg-gradient-to-b from-yellow-500 to-gray-200">
-
+      <header className="text-center pt-2 mb-7 bg-gradient-to-b from-purple-200 to-gray-200">
         <Link to="/"><img className="m-auto" style={{ width: `700px` }} alt="Avatar Generator" src={titleLogo} /></Link>
-
         <nav className="my-7">
-          <Link to="/" className="mx-10 p-2 bg-purple-700 text-white outline-none rounded focus:outline-none hover:bg-purple-600 shadow-lg transform duration-75 ease-in-out">Latest avatars</Link>
-          <Link to="/new-avatar" className="mx-10 p-2 bg-purple-700 text-white outline-none rounded focus:outline-none hover:bg-purple-600 shadow-lg transform duration-75 ease-in-out">Generate your avatar</Link>
+          <NavLink to="/" exact activeClassName="border-purple-400 font-semibold" className="mx-3 p-4 border-b-2 bg-purple-700 bg-opacity-10 rounded-t hover:border-purple-700 text-purple-900">Avatars</NavLink>
+          <NavLink to="/new-avatar" activeClassName="border-purple-400 font-semibold" className="mx-3 p-4 border-b-2 bg-purple-700 bg-opacity-10 rounded-t hover:border-purple-700 text-purple-900">Generator</NavLink>
         </nav>
-
       </header>
 
-        
       <div className="px-10 mx-auto max-w-6xl items-center">
         <Switch>
-          <Route path="/new-avatar" component={UserForm}/>
+          <Route path="/new-avatar" component={UserForm} />
           <Route path="/" component={Cards}/>
         </Switch>
       </div>

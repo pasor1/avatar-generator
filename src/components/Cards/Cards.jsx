@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Card from './Card/Card';
-import axios from 'axios';
+import axios from '../../axiosConfig';
 import FullscreenLoader from '../FullscreenLoader/FullscreenLoader';
 
 const Cards = props => {
@@ -14,7 +14,7 @@ const Cards = props => {
 
   const getUsers = () => {
     setLoading(true);
-    axios.get('https://burger-builder-6a382-default-rtdb.europe-west1.firebasedatabase.app/users.json')
+    axios.get('/avatars.json')
       .then(response => {
         let responseToArray = []
         for (const item in response.data) {
@@ -38,7 +38,7 @@ const Cards = props => {
 
   const clickDeleteHandler = (id) => {
     setLoading(true);
-    axios.delete(`https://burger-builder-6a382-default-rtdb.europe-west1.firebasedatabase.app/users/${id}.json`)
+    axios.delete(`/avatars/${id}.json`)
       .then(response => {
         getUsers();
       })

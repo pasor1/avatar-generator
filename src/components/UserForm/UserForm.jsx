@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React, { useState } from 'react';
+import axios from '../../axiosConfig';
 import Card from '../Cards/Card/Card';
 import FullscreenLoader from '../FullscreenLoader/FullscreenLoader';
 
@@ -23,7 +23,7 @@ const UserForm = (props) => {
         username: username,
         avatarType: avatarType
       };
-      axios.post('https://burger-builder-6a382-default-rtdb.europe-west1.firebasedatabase.app/users.json', data)
+      axios.post('/avatars.json', data)
         .then(response => { 
           props.history.push('/');
         })
